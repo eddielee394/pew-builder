@@ -1,0 +1,34 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+
+# Large GLB files - excluded for deployment size limits
+src/models/guns/cz_scorpion_evo_3_s1.glb
+src/models/guns/scorpion_cz-61.glb
+src/models/accessories/suppressors/suppressors_10_pack.glb
+src/models/guns/weapon_pack_of_10100_part_8.glb
+src/models/raw-assets/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
