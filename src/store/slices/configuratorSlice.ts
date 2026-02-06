@@ -1,6 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { Firearm } from '../../types'
 import type { MountedAccessory } from '../../types'
+import { firearms } from '../../data/firearms'
+
+const defaultFirearm = firearms.find((f) => f.id === 'hk-mp5') ?? null
 
 export interface ConfiguratorState {
   selectedFirearm: Firearm | null
@@ -12,7 +15,7 @@ export interface ConfiguratorState {
 }
 
 const initialState: ConfiguratorState = {
-  selectedFirearm: null,
+  selectedFirearm: defaultFirearm,
   mountedAccessories: [],
   cerakoteColorId: null,
   cerakotePatternId: null,
