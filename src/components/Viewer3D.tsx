@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { useState, useEffect } from 'react'
+import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { Suspense } from 'react'
 import { useAppSelector } from '../store/hooks'
@@ -115,6 +115,16 @@ function Scene({ firearm, mountedAccessories }: { firearm: Firearm | null; mount
   )
 }
 
+/** Ensures transparent clear so the CSS gradient on .viewer-3d shows through */
+function TransparentBackground() {
+  const { scene, gl } = useThree()
+  useEffect(() => {
+    scene.background = null
+    gl.setClearColor(0x000000, 0)
+  }, [scene, gl])
+  return null
+}
+
 const DEFAULT_CAMERA_DISTANCE = 4
 
 function getCameraPosition(firearm: Firearm | null): [number, number, number] {
@@ -146,9 +156,9 @@ export function Viewer3D() {
         key={`${selectedFirearm?.id ?? 'none'}-${resetKey}`}
         shadows
         camera={{ position: cameraPos, fov: 50 }}
-        gl={{ alpha: false }}
+        gl={{ alpha: true }}
       >
-        <color attach="background" args={['#e5e7eb']} />
+        <TransparentBackground />
         <Suspense fallback={null}>
           <Scene firearm={selectedFirearm} mountedAccessories={mountedAccessories} />
         </Suspense>
